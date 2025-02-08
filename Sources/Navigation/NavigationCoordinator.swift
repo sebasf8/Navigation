@@ -11,6 +11,8 @@ import Foundation
 public final class NavigationCoordinator: ObservableObject {
     private(set) var showRoot: Bool = true
 
+    public init() {}
+    
     public func popToRoot() {
         showRoot = true
         objectWillChange.send()

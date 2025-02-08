@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-public struct NavigateViewModifier<Destination>: ViewModifier where Destination: Routable {
+struct NavigateViewModifier<Destination>: ViewModifier where Destination: Routable {
     @EnvironmentObject private var coordinator: NavigationCoordinator
     @State private var isActive: Bool = false
     @Binding private var route: Destination?
 
-    public init(route: Binding<Destination?>) {
+    init(route: Binding<Destination?>) {
         self._route = route
     }
 
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
         VStack(spacing: .zero) {
             NavigationLink(isActive: $isActive) {
                 route?.makeView()
@@ -46,7 +46,7 @@ public struct NavigateViewModifier<Destination>: ViewModifier where Destination:
 }
 
 extension View {
-    func navigate<Destination>(to route: Binding<Destination?>) -> some View where Destination: Routable {
+    public func navigate<Destination>(to route: Binding<Destination?>) -> some View where Destination: Routable {
         self.modifier(NavigateViewModifier(route: route))
     }
 }
